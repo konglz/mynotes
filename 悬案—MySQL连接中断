@@ -1,0 +1,7 @@
+调用MySQL时，提示连接中断，猜测是Druid连接池没有配置keepalive：https://github.com/alibaba/druid/wiki/KeepAlive_cn
+但尚未证实
+
+运行环境：
+sharding-jdbc
+druid
+mysql
