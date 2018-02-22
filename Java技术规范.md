@@ -58,6 +58,20 @@
 
 * @Resource：JSR-250提供的注解。
 
+* @Value("xxxx") 注入普通字符串，常量
+
+*  @Value("${xxx.xxx}") 注入配置文件中字符串
+
+*  @PostConstruct 标注在方法上，在构造函数执行完毕后执行
+
+* @PreDestroy Bean 标注在方法上，销毁前执行，比如释放资源（关闭线程池等）
+
+* @Async 异步方法表明，若是在class上则全是
+
+* @Scheduled 声明方法是计划任务
+
+* @Conditional() 条件注解，当满足某条件时
+
 * @Autowired、@Inject、@Resource可注解在set方法上或属性上，但建议注解在属性上，优点是代码更少、层次更清晰。
 
 * @Autowired、@Inject、@Resource注解在属性上时，不需要存方法也能注进来，它是根据反射设值的，所以，在此时最好不要定义存方法
