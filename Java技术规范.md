@@ -14,6 +14,8 @@
 
 * 属性应该通过一组存取方法（getXxx 和 setXxx）来访问，一般是IDE(Eclipse、JBuilder) 为属性生成getter/setter 方法
 
+* 存方法的返回值必须为void，即不返回任何值
+
 ### 禁止
 
 * 关于存方法，**禁止用builder模式**（链式调用）的存方法，否则可能会导致一些框架set属性出错
