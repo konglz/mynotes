@@ -38,7 +38,7 @@
 
 * 接收请求参数的bean、接收数据库数据的bean，属性最好不要用基本类型，要用封装类型，比如：private boolean deleted最好改成private Boolean deleted
 
-### 3. spring组件规范
+### 3. spring注解使用规范
 
 #### 声明Bean的注解：
 
@@ -59,6 +59,8 @@
 * @Resource：JSR-250提供的注解。
 
 * @Autowired、@Inject、@Resource可注解在set方法上或属性上，但建议注解在属性上，优点是代码更少、层次更清晰。
+
+* @Autowired、@Inject、@Resource注解在属性上时，不需要存方法也能注进来，它是根据反射设值的，所以，在此时最好不要定义存方法
 
 ### 4. servlet规范
 
