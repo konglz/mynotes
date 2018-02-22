@@ -82,6 +82,18 @@
 
 * @Autowired、@Inject、@Resource注解在属性上时，不需要存方法也能注进来，它是根据反射设值的，所以，在此时最好不要定义存方法
 
+#### SpringMvc相关
+
+* @RequestMapping 用于映射Web请求 返回体，编码格式都可以在此处设置 produces = {} 设置返回值json/xml charset 等
+
+* @RestController 这是个组合注解，组合了@Controller和@ResponseBody
+
+* @ResponseBody 支持返回体放入response体中，而不是直接返回一个页面，此注解可以放在返回值或者方法体上
+
+* @RequestBody 允许参数在request体里，而不是在地址栏后面
+
+* @PathVariable 用来接收路径参数，api/{id}
+
 ### 4. servlet规范
 
 ### 5. jdbc规范
