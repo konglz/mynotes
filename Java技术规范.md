@@ -38,3 +38,29 @@
 
 * 接收请求参数的bean、接收数据库数据的bean，属性最好不要用基本类型，要用封装类型，比如：private boolean deleted最好改成private Boolean deleted
 
+### 3. spring组件规范
+
+#### 声明Bean的注解：
+
+* @Component：组件，没有明确的角色。
+
+* @Service：在业务逻辑层（Service层）使用。
+
+* @Repository：在数据访问层（dao层）使用。
+
+* @Controller：在展现层（MVC→Spring MVC）使用
+
+#### 注入Bean的注解，一般情况下通用：
+
+* @Autowired：Spring提供的注解。
+
+* @Inject：JSR-330提供的注解。
+
+* @Resource：JSR-250提供的注解。
+
+* @Autowired、@Inject、@Resource可注解在set方法上或属性上，但建议注解在属性上，优点是代码更少、层次更清晰。
+
+### 4. servlet规范
+
+### 5. jdbc规范
+
