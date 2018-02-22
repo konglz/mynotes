@@ -126,3 +126,9 @@
 #### sql相关
 
 * 不要写过于复杂的sql，join不应该超过3层，不要企图用一条语句搞定所有事情；遇到复杂查询，可以想办法改成多次查询并在应用层拼接数据；因为应用程序容易扩展，数据库不易扩展，应当适当减轻数据库的计算负担，不要图一时之快
+
+* 不要用select \*，如果用了，可能会给加字段带来极大的困难，因为Java是强类型语言，又惯用java bean来接收数据，当sql查到的字段比java bean多时，一些ORM框架会无法兼容而报错
+
+* 用mybatis时，如果自动生成Mapper，应当用insertXxxSelective、updateXxxSelective这类以Selective结尾的方法；不以Selective结尾的方法会覆盖数据库的缺省值，每一个属性都要手工设值，这种行为可能会导致写入null值，引发报错
+
+* 用mybatis时，insert相关方法最好配上**自动回填主键**，我们可能在上文insert一条记录，下文又要取insert进去的记录的id，关联到从属表里
