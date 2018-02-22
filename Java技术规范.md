@@ -52,7 +52,9 @@
 
 * @Configurable 声明当前类是一个配置类
 
-* @ComponentScan("com.reachauto.cxn.book.test")  设置自动扫描包下面所有的 @Service @Component @Repository @Controller 一般在启动配置中配，慎用，勿滥用
+* @ComponentScan("com.reachauto.cxn.book.test")  设置自动扫描包下面所有的 @Service @Component @Repository @Controller 一般在全局启动配置中配，慎用，勿滥用
+
+* @EnableScheduling 注解开启对计划任务的支持，一般在全局启动配置中配，慎用，勿滥用
 
 #### 注入Bean的注解，一般情况下通用：
 
