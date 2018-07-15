@@ -59,7 +59,7 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
 
 #### 2.1.1. io线程池
 
-> netty的boss和worker线程池
+> netty的boss和worker线程池，默认为cached线程池
 
 * boss：建立connection
 
@@ -87,7 +87,7 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
   
 ### 2.2. 客户端
 
-* io线程池：netty的boss和worker线程池，默认为cached线程池，默认数量为是：核数+1
+* io线程池：netty的boss和worker线程池
 
 * 业务线程池
 
