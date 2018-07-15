@@ -11,6 +11,8 @@
 
   * IDL（Interface description language），在web service是wsdl，在grpc是protobuf，在dubbo是java interface + po（普通值对象）
   
+  * 接口仓库，在web service是wsdl服务器，在grpc是gitlab + 文件，在dubbo一般是maven仓库（nexus）
+  
 * 代理层
 
   * Stub 客户端桩
