@@ -59,7 +59,9 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
 
 #### 2.1.1. io线程池
 
-> netty的boss和worker线程池，默认为cached线程池，序列化和反序列化在io线程上进行
+> netty的boss和worker线程池，序列化和反序列化在io线程上进行
+
+> This thread pool is self-tuned. Thread will be recycled after idle for one minute, and new thread will be created for the upcoming request.
 
 * boss：建立connection
 
@@ -150,5 +152,6 @@ actives	| consumer| 0	| 每服务消费者每服务每方法最大并发调用�
 connections	| consumer|  | 对每个提供者的最大连接数，rmi、http、hessian等短连接协议表示限制连接数，dubbo等长连接协表示建立的长连接个数 |		dubbo时为1，及复用单链接
 accepts	| provider| 0 | 服务提供方最大可接受连接数 |	0表示不限制
 iothreads	| provider| cpu个数+1 | io线程池大小(固定大小) |	
+threads	| provider | 200 | 业务线程池大小(固定大小) |
 executes	| provider| 0 | 服务提供者每服务每方法最大可并行执行请求数 |	0表示不限制
 tps	| provider| | 指定时间内（默认60s）最大的可执行次数，注意与executes的区别 |	默认不开启
