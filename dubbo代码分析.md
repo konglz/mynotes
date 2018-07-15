@@ -57,6 +57,8 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
 
 ### 2.1. 服务端
 
+> 对应的类为 org.apache.dubbo.remoting.transport.netty.NettyServer
+
 #### 2.1.1. io线程池
 
 > netty的boss和worker线程池，序列化和反序列化在io线程上进行
@@ -88,6 +90,8 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
   * 与worker配合处理各种请求
   
 ### 2.2. 客户端
+
+> 对应的类为 org.apache.dubbo.remoting.transport.netty.NettyClient
 
 * io线程池：netty的boss和worker线程池
 
