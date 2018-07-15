@@ -53,11 +53,54 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
   
 * 访问日志
 
-## 2. dubbo事件分配
+## 2. dubbo线程模型
 
-### 2.1. 事件与线程池
+### 2.1. 服务端
 
-#### 2.1.1. 事件类型
+#### 2.1.1. io线程池
+
+> netty的boss和worker线程池
+
+* boss：建立connection
+
+  * accept客户端的连接；
+
+  * 将接收到的连接注册到一个worker线程上
+
+  * 通常情况下，服务端每绑定一个端口，开启一个boss线程
+
+* worker：处理注册在其身上的连接connection上的各种io事件
+
+  * 默认是：核数+1
+
+  * 一个worker线程可以注册多个connection
+  
+  * 一个connection只能注册在一个worker线程上
+
+#### 2.1.2. 业务线程池
+
+* 默认为 fixedThreadPool
+
+* 默认线程名大概是这样 “DubboServerHandler-10.10.10.11:20880”，可以通过配置方式自定义
+
+  * 与worker配合处理各种请求
+  
+### 2.2. 客户端
+
+* io线程池：netty的boss和worker线程池，默认为cached线程池，默认数量为是：核数+1
+
+* 业务线程池
+
+  * 默认为 cachedThreadPool
+  
+  * 默认线程名大概是这样 “DubboClientHandler-10.10.10.10:20880”，也可以自定义
+
+
+## 3. dubbo事件分配
+
+> 框架事件分配给业务线程池
+
+#### 3.1. 事件类型
 
 * connected 连接成功
 
@@ -69,7 +112,7 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
 
 * 心跳
 
-### 2.1.2. 线程池类型
+### 3.2. 线程池类型
 
 * fixed：固定大小线程池，启动时建立线程，不关闭，一直持有。(缺省)
 
@@ -85,7 +128,7 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
 
 * limited：可伸缩线程池，但池中的线程数只会增长不会收缩。只增长不收缩的目的是为了避免收缩时突然来了大流量引起的性能问题。
 
-### 分配策略
+### 3.3. 分配策略
 
 * 默认是all：所有消息都派发到线程池，包括请求，响应，连接事件，断开事件，心跳等。 即worker线程接收到事件后，将该事件提交到业务线程池中，自己再去处理其他事
 
@@ -96,64 +139,3 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
 * execution：只请求消息派发到线程池，不含响应（客户端线程池），响应和其它连接断开事件，心跳等消息，直接在 IO 线程上执行
 
 * connection：在 IO 线程上，将连接断开事件放入队列，有序逐个执行，其它消息派发到线程池。
-
-## 4. dubbo线程模型
-
-### 4.1. 服务端
-
-#### 4.1.1. io线程池
-
-> netty的boss和worker线程池
-
-* boss：建立connection
-
-* worker：处理注册在其身上的连接connection上的各种io事件
-
-#### 4.1.2. 业务线程池
-
-* 默认为 fixedThreadPool
-
-* 默认线程名大概是这样 “DubboServerHandler-10.10.10.11:20880”，可以通过配置方式自定义
-
-  * 与worker配合处理各种请求
-  
-### 4.2. 客户端
-
-* io线程池：netty的boss和worker线程池
-
-* 业务线程池
-
-  * 默认为 cachedThreadPool
-  
-  * 默认线程名大概是这样 “DubboClientHandler-10.10.10.10:20880”，也可以自定义
-
-
-## 3. netty 线程模型
-
-### 3.1. boss线程
-
-#### 3.1.1. 作用：
-
-* accept客户端的连接；
-
-* 将接收到的连接注册到一个worker线程上
-
-#### 3.1.2. 个数：
-
-* 通常情况下，服务端每绑定一个端口，开启一个boss线程
-
-### 3.2. worker线程
-
-#### 3.2.1. 作用：
-
-* 处理注册在其身上的连接connection上的各种io事件
-
-#### 3.2.2. 个数：
-
-* 默认是：核数+1
-
-## 3.3. 注意：
-
-* 一个worker线程可以注册多个connection
-
-* 一个connection只能注册在一个worker线程上
