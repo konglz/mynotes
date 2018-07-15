@@ -139,3 +139,16 @@ RPC（Remote Procedure Call），远程过程调用，调远程机器上的方�
 * execution：只请求消息派发到线程池，不含响应（客户端线程池），响应和其它连接断开事件，心跳等消息，直接在 IO 线程上执行
 
 * connection：在 IO 线程上，将连接断开事件放入队列，有序逐个执行，其它消息派发到线程池。
+
+## 4. dubbo 调优
+
+### 4.1. 线程相关参数
+
+参数名 | 作用范围 | 默认值 | 说明 | 备注 
+|:-|:-|:-|:-|:-|
+actives	| consumer| 0	| 每服务消费者每服务每方法最大并发调用数 |	0表示不限制
+connections	| consumer|  | 对每个提供者的最大连接数，rmi、http、hessian等短连接协议表示限制连接数，dubbo等长连接协表示建立的长连接个数 |		dubbo时为1，及复用单链接
+accepts	| provider| 0 | 服务提供方最大可接受连接数 |	0表示不限制
+iothreads	| provider| cpu个数+1 | io线程池大小(固定大小) |	
+executes	| provider| 0 | 服务提供者每服务每方法最大可并行执行请求数 |	0表示不限制
+tps	| provider| | 指定时间内（默认60s）最大的可执行次数，注意与executes的区别 |	默认不开启
